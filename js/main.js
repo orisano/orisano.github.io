@@ -19,7 +19,6 @@ $(function(){
 	var count = 0;
 	var userTemplate = _.template("<tr><td><%= name %></td><td><%= solved %></td></tr>");
 	_.each(users, function(user){ getSolved(user, function(username, solved){
-		$("table#watch-table").append(userTemplate({name: username, solved: solved}));
 		count++;
 		users_.push({name: username, solved: solved});
 	});});
@@ -35,11 +34,12 @@ $(function(){
 		}
 	};
 	
-	waitComplete(1000, function(){
+	waitComplete(100, function(){
 		var ctx = document.getElementById("solved-graph").getContext("2d");
 		users_.sort(function(a, b){
 				return a.solved - b.solved;
 		});
+		_.each(users_, function(item){ $("table#watch-table").append(userTemplate(item)); });
 		new Chart(ctx).Bar({
 			labels: _.map(users_, function(usr){ return (usr.name) }),
 			datasets : [{ data : _.map(users_, function(usr){ return (usr.solved)}) }]
