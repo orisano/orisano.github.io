@@ -21,8 +21,7 @@ $(function(){
 	_.each(users, function(user){ getSolved(user, function(username, solved){
 		$("table#watch-table").append(userTemplate({name: username, solved: solved}));
 		count++;
-		users_.push(username);
-		solved_.push(solved);
+		users_.push({name: username, solved: solved});
 	});});
 
 	var waitComplete = function(span, callback){
@@ -38,9 +37,12 @@ $(function(){
 	
 	waitComplete(1000, function(){
 		var ctx = document.getElementById("solved-graph").getContext("2d");
+		users_.sort(function(a, b){
+				return a.solved - b.solved;
+		});
 		new Chart(ctx).Bar({
-			labels: users_,
-			datasets : [{ data : solved_ }]
+			labels: _.map(users_, function(usr){ return (usr.name) }),
+			datasets : [{ data : _.map(users_, function(usr){ return (usr.solved)}) }]
 		});
 	});
 });
