@@ -26,15 +26,21 @@
         geocoder.geocode({"address": address}, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
             map.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
+            marker = new google.maps.Marker({
               map: map,
               position: results[0].geometry.location
             });
+            marker.setDraggable(true);
           }
           else {
             alert("dame poyo");
           }
         });
+      }
+      function getLatLng(){
+        var pos = marker.getPosition();
+        document.getElementById("lat").value = pos.lat();
+        document.getElementById("lng").value = pos.lng();
       }
     </script>
   </head>
@@ -48,5 +54,6 @@
     </form>
     <input type="textbox" id="address">
     <input type="button" value="Encode" onclick="codeAddress()">
+    <input type="button" value="GetLatLng" onclick="getLatLng()">
   </body>
 </html>
