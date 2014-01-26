@@ -47,13 +47,14 @@
   <body onload="initialize()">
     <div id="map_canvas" style="width:50%; height:50%"></div>
     <form action="null" method="POST" enctype="multipart/form-data">
-      <input type="file" name="image" />
-      <input type="text" name="lat" id="lat" />
-      <input type="text" name="lng" id="lng" />
-      <input type="submit" value="SEND" />
+      <input type="file" name="image">
+      <input type="text" name="lat" id="lat">
+      <input type="text" name="lng" id="lng">
+      <input type="submit" value="SEND">
     </form>
     <input type="textbox" id="address">
     <input type="button" value="Encode" onclick="codeAddress()">
     <input type="button" value="GetLatLng" onclick="getLatLng()">
+    <input type="text" name="title" id="title">
   </body>
 </html>
