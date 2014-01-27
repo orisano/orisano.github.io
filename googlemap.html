@@ -47,16 +47,16 @@
   <body onload="initialize()">
     <div id="map_canvas" style="width:50%; height:50%"></div>
     <form action="http://133.242.230.30:5000/api/post_hyakei" method="POST" enctype="multipart/form-data">
-      <input type="file" name="image">
+      <input type="file" name="picture">
       <br>
       <label for="lat">緯度</label>
-      <input type="text" name="lat" id="lat">
+      <input type="text" name="posLat" id="lat">
       <br>
       <label for="lng">経度</label>
-      <input type="text" name="lng" id="lng">
+      <input type="text" name="posLng" id="lng">
       <br>
       <label for="title">タイトル</label>
-      <input type="text" name="title" id="title">
+      <input type="text" name="titleName" id="title">
       <br>
       <input type="submit" value="SEND">
     </form>
