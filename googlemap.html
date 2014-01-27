@@ -14,7 +14,7 @@
       function initialize() {
         geocoder = new google.maps.Geocoder();
         var mapOptions = {
-          center: new google.maps.LatLng(20.397, 130.644),
+          center: new google.maps.LatLng(26.5915, 127.9773),
           zoom: 8,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -31,6 +31,8 @@
               position: results[0].geometry.location
             });
             marker.setDraggable(true);
+            getLatLng();
+            document.getElementById("title").value = address;
           }
           else {
             alert("dame poyo");
@@ -45,7 +47,10 @@
     </script>
   </head>
   <body onload="initialize()">
-    <div id="map_canvas" style="width:50%; height:50%"></div>
+    <div id="map_canvas" style="width:100%; height:70%"></div>
+    <input type="textbox" id="address">
+    <input type="button" value="名称検索" onclick="codeAddress()">
+    <input type="button" value="緯度経度取得" onclick="getLatLng()">
     <form action="http://133.242.230.30:5000/api/post_hyakei" method="POST" enctype="multipart/form-data">
       <input type="file" name="picture">
       <br>
@@ -60,8 +65,5 @@
       <br>
       <input type="submit" value="SEND">
     </form>
-    <input type="textbox" id="address">
-    <input type="button" value="名称検索" onclick="codeAddress()">
-    <input type="button" value="緯度経度取得" onclick="getLatLng()">
   </body>
 </html>
