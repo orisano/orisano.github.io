@@ -52,7 +52,8 @@
     <input type="button" value="名称検索" onclick="codeAddress()">
     <input type="button" value="緯度経度取得" onclick="getLatLng()">
     <form action="http://133.242.230.30:5000/api/post_hyakei" method="POST" enctype="multipart/form-data">
-      <input type="file" name="picture">
+      <label for="picture">百景の画像</label>
+      <input type="file" name="picture" id="picture">
       <br>
       <label for="lat">緯度</label>
       <input type="text" name="posLat" id="lat">
