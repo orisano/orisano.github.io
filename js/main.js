@@ -13,7 +13,7 @@ $(function(){
 		});
 	}
 
-	var users = ["raimei10130", "kagamiz", "orisano", "li_saku", "marin72_com"];
+	var users = ["raimei10130", "kagamiz", "orisano", "li_saku", "marin72_com", "shogo1996"];
 	var users_ = [];
 	var solved_ = [];
 	var count = 0;
