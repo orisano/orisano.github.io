@@ -13,14 +13,14 @@ $(function() {
       success: function(xml, status) {
         var solved, uname;
         uname = $(xml).find("user > id").text();
-        solved = $(xml).find("user > id > solved").text();
+        solved = $(xml).find("user > status > solved").text();
         return callback(uname, solved, status);
       }
     });
     return 0;
   };
   users = ["raimei10130", "kagamiz", "orisano", "li_saku", "marin72_com", "shogo1996"];
-  user_template = _.template("<tr><td><%= name %></td><td><%= solved %></td></tr>");
+  user_template = _.template("<tr><td><%= uname %></td><td><%= solved %></td></tr>");
   looper = null;
   looper = function(ready_user, processed_user, callback) {
     var uname;
@@ -31,7 +31,7 @@ $(function() {
       return getSolved(uname, function(name, solve, status) {
         processed_user.push({
           uname: name,
-          solved: solve
+          solved: parseInt(solve)
         });
         return looper(ready_user, processed_user, callback);
       });
@@ -42,9 +42,15 @@ $(function() {
     context = document.getElementById("solved-graph").getContext("2d");
     ulist.sort(function(a, b) {
       if (a.solved === b.solved) {
-        return a.uname < b.uname;
+        if (a.uname < b.uname) {
+          return -1;
+        }
+        if (a.uname > b.uname) {
+          return 1;
+        }
+        return 0;
       }
-      return a.solved < b.solved;
+      return a.solved - b.solved;
     });
     _.each(ulist, function(item) {
       return $("table#watch-table").append(user_template(item));

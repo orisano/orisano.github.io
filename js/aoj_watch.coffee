@@ -9,13 +9,13 @@ $(() ->
       dataType: "xml",
       success: (xml, status) ->
         uname  = $(xml).find("user > id").text()
-        solved = $(xml).find("user > id > solved").text()
+        solved = $(xml).find("user > status > solved").text()
         callback(uname, solved, status)
     })
     return 0
 
   users = ["raimei10130", "kagamiz", "orisano", "li_saku", "marin72_com", "shogo1996"]
-  user_template = _.template("<tr><td><%= name %></td><td><%= solved %></td></tr>")
+  user_template = _.template("<tr><td><%= uname %></td><td><%= solved %></td></tr>")
 
   looper = null
   looper = (ready_user, processed_user, callback) ->
@@ -24,7 +24,7 @@ $(() ->
     else
       uname = ready_user.shift()
       getSolved(uname, (name, solve, status) ->
-        processed_user.push({uname: name, solved: solve})
+        processed_user.push({uname: name, solved: parseInt(solve)})
         looper(ready_user, processed_user, callback)
       )
 
@@ -32,8 +32,12 @@ $(() ->
     context = document.getElementById("solved-graph").getContext("2d")
     ulist.sort((a, b) ->
       if a.solved == b.solved
-        return a.uname < b.uname
-      return a.solved < b.solved
+        if a.uname < b.uname
+          return -1
+        if a.uname > b.uname
+          return 1
+        return 0
+      return a.solved - b.solved
     )
     _.each(ulist, (item) ->
       $("table#watch-table").append(user_template(item))
