@@ -14,7 +14,7 @@ $(() ->
     })
     return 0
 
-  users = ["raimei10130", "kagamiz", "orisano", "li_saku", "marin72_com", "shogo1996"]
+  users = ["oken", "harekumo", "raimei10130", "kagamiz", "orisano", "li_saku", "marin72_com", "shogo1996"]
   user_template = _.template("<tr><td><%= uname %></td><td><%= solved %></td></tr>")
 
   looper = null
