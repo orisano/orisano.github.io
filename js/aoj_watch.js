@@ -39,7 +39,7 @@ $(function() {
   };
   return looper(users, [], function(ulist) {
     var context;
-    context = document.egetElementById("solved-graph").getContext("2d");
+    context = document.getElementById("solved-graph").getContext("2d");
     ulist.sort(function(a, b) {
       if (a.solved === b.solved) {
         return a.uname < b.uname;

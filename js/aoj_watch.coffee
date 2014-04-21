@@ -29,7 +29,7 @@ $(() ->
       )
 
   looper(users, [], (ulist) ->
-    context = document.egetElementById("solved-graph").getContext("2d")
+    context = document.getElementById("solved-graph").getContext("2d")
     ulist.sort((a, b) ->
       if a.solved == b.solved
         return a.uname < b.uname
