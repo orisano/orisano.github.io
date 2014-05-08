@@ -1,55 +1,59 @@
-
 $(() ->
-  getSolved = (username, callback) ->
-    API_URL = "http://judge.u-aizu.ac.jp/onlinejudge/webservice/user?id="
-    request_url = API_URL + username
+  API_URL = "http://judge.u-aizu.ac.jp/onlinejudge/webservice/"
+  USERS = ["seungri", "ringoh72", "m_kyoujyu", "oken", "harekumo", "raimei10130", "kagamiz", "orisano", "li_saku", "marin72_com", "shogo1996", "Cmiz56", "defective"]
+
+  get_api = (req_url) ->
+    dfd = $.Deferred()
     $.ajax({
-      url: request_url,
-      type: "get",
+      type: "GET",
+      url: req_url,
       dataType: "xml",
-      success: (xml, status) ->
-        uname  = $(xml).find("user > id").text()
-        solved = $(xml).find("user > status > solved").text()
-        callback(uname, solved, status)
-    })
-    return 0
+    }).done((res) ->
+      dfd.resolve(res)
+    ).fail((res) ->
+      dfd.reject(res)
+    )
+    return dfd.promise()
 
-  users = ["seungri", "ringoh72", "m_kyoujyu", "oken", "harekumo", "raimei10130", "kagamiz", "orisano", "li_saku", "marin72_com", "shogo1996", "Cmiz56", "defective"]
-  user_template = _.template("<tr><td><%= uname %></td><td><%= solved %></td></tr>")
+  get_solve = (user) ->
+    USER_API_URL = API_URL + "user?id="
+    return get_api(USER_API_URL + user)
 
-  looper = null
-  looper = (ready_user, processed_user, callback) ->
-    if ready_user.length == 0
-      callback(processed_user)
-    else
-      uname = ready_user.shift()
-      getSolved(uname, (name, solve, status) ->
-        processed_user.push({uname: name, solved: parseInt(solve)})
-        looper(ready_user, processed_user, callback)
-      )
+  get_solves = (user_list) ->
+    dfds = (get_solve(user) for user in user_list)
+    return $.when.apply($, dfds)
+  
+  parse_xml = (xml, scheme) ->
+    xml = $(xml)
+    element = {}
+    for name, f of scheme
+      names = name.split(">")
+      key = names[names.length - 1]
+      element[key] = f(xml.find(name).text())
+    return element
 
-  looper(users, [], (ulist) ->
-    context = document.getElementById("solved-graph").getContext("2d")
-    ulist.sort((a, b) ->
+  parse_solve = (xml) ->
+    return parse_xml(xml, {"user>id": String, "user>status>solved": parseInt})
+
+  user_template = _.template("<tr><td><%= id %></td><td><%= solved %></td></tr>")
+  $.when(get_solves(USERS), {}).done((solves_xml) ->
+    solves = (parse_solve(solve_xml) for solve_xml in solves_xml)
+    solves.sort((a, b) ->
       if a.solved == b.solved
-        if a.uname < b.uname
+        if a.id < b.id
           return -1
-        if a.uname > b.uname
+        if a.id > b.id
           return 1
         return 0
       return a.solved - b.solved
     )
-    _.each(ulist, (item) ->
-      $("table#watch-table").append(user_template(item))
-    )
+    context = document.getElementById("solved-graph").getContext("2d")
+    for solver in solves
+      $("table#watch-table").append(user_template(solver))
     new Chart(context).Bar({
-      labels: _.map(ulist, (usr) ->
-        return usr.uname
-      ),
+      labels: (solver.id for solver in solves),
       datasets: [{
-        data: _.map(ulist, (usr) ->
-          return usr.solved
-        )
+        data: (solver.solved for solver in solves),
       }]
     })
   )
