@@ -3,7 +3,7 @@
 $(function() {
   var API_URL, USERS, get_api, get_solve, get_solves, parse_solve, parse_xml, user_template;
   API_URL = "http://judge.u-aizu.ac.jp/onlinejudge/webservice/";
-  USERS = ["fouga", "matetya911", "seungri", "ringoh72", "m_kyoujyu", "oken", "harekumo", "raimei10130", "kagamiz", "orisano", "li_saku", "marin72_com", "shogo1996", "Cmiz56", "defective"];
+  USERS = ["jin_matakich", "fouga", "matetya911", "seungri", "ringoh72", "m_kyoujyu", "oken", "harekumo", "raimei10130", "kagamiz", "orisano", "li_saku", "marin72_com", "shogo1996", "Cmiz56", "defective"];
   get_api = function(req_url) {
     var dfd;
     dfd = $.Deferred();
