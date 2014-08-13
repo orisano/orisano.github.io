@@ -1,0 +1,10 @@
+.CodeMirror {
+	height: 100%;
+}
+
+.editor-space {
+	position: fixed;
+	height: 94%;
+	width: 50%;
+	margin-left: 0px;
+}
