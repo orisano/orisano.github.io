@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="./static/css/codemirror.css">
+	<link rel="stylesheet" href="./static/css/bootmetro.css">
+	<link rel="stylesheet" href="./static/css/bootmetro-icons.css">
+	<link rel="stylesheet" href="./static/css/bootmetro-ui-light.css">
+	<link rel="stylesheet" href="./static/css/main.css">
+	<script src="./static/js/jquery-1.10.0.min.js"></script>
+	<script src="./static/js/codemirror.js"></script>
+	<script src="./static/js/vb.js"></script>
+	<script src="./static/js/main.js"></script>
+	<title>Test</title>
+</head>
+<body>
+	<div class="win-ui-dark">
+		<a class="win-command win-command-small" id="btn-upload">
+			<span class="win-commandicon win-commandring icon-upload-3"></span>
+			<span class="win-label">Upload</span>
+		</a>
+		<a class="win-command win-command-small">
+			<span class="win-commandicon win-commandring icon-floppy"></span>
+			<span class="win-label">Save</span>
+		</a>
+		<a data-toggle="modal" href="#loginModal" class="win-command win-command-small">
+			<span class="win-commandicon win-commandring icon-login"></span>
+			<span class="win-label">Login</span>
+		</a>
+	</div>
+
+	<div id="loginModal" class="modal hide fade">
+		<div class="modal-header">
+			<button class="close" type="button" data-dismiss="modal" aria-hidden="true"></button>
+			<h3>Login</h3>
+		</div>
+		<div class="modal-body">
+			<label for="user_id">UserID</label>
+			<input type="text" name="user_id" id="user_id">
+			<label for="passwd">Password</label>
+			<input type="password" name="passwd" id="passwd">
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn btn-primary" id="login_button">Login</a>
+		</div>
+	</div>
+
+	<div class="editor-space">
+		<textarea id="editor"></textarea>
+	</div>
+</body>
+</html>
