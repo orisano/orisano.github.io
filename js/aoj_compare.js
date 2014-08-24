@@ -4,7 +4,7 @@
     var aojLib, appendSolved, compareSolved, solveTemplate, tweetTag, tweetTemplate, updateTweetButton;
     aojLib = new AOJLib();
     solveTemplate = _.template('<td><a target="_blank" href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=<%= id %>"><%= id %></a></td>');
-    tweetTemplate = _.template('<%= rivalName %>さんと私は<%= bothCount %>問一緒に解いていて、<%= myOnlyCount %>問が私だけ解いていて <%= rivalOnlyCount %>問が<%= rivalName %>さんだけが解いています');
+    tweetTemplate = _.template('<%= rivalName %>さんと私は<%= bothCount %>問一緒に解いていて、<%= myOnlyCount %>問が私だけ解いていて <%= rivalOnlyCount %>問が<%= rivalName %>さんだけが解いています http://orisano.github.io/aoj_compare');
     tweetTag = "";
     appendSolved = function(list, tableName, nlspan) {
       var count, tr, x, _i, _len;
