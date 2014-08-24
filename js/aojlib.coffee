@@ -9,6 +9,12 @@ class AOJLib
   getSolveList: (userList) =>
     @_getPromiseList userList, @getSolve
 
+  getSolves: (user) =>
+    @_reqAPI "user", {id: user}, @_parseSolves
+
+  getSolvesList: (userList) =>
+    @_getPromiseList userList, @getSolves
+
   getStatus: (user) =>
     @_reqAPI "status_log", {user_id: user}, @_parseStatus
 
@@ -68,3 +74,7 @@ class AOJLib
       "user>id": String,
       "user>status>solved": parseInt,
     })
+
+  _parseSolves: (xml) ->
+    ($(id).text() for id in $(xml).find("user>solved_list>problem>id"))
+

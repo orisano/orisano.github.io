@@ -17,6 +17,10 @@ AOJLib = (function() {
 
     this.getStatus = __bind(this.getStatus, this);
 
+    this.getSolvesList = __bind(this.getSolvesList, this);
+
+    this.getSolves = __bind(this.getSolves, this);
+
     this.getSolveList = __bind(this.getSolveList, this);
 
     this.getSolve = __bind(this.getSolve, this);
@@ -35,6 +39,16 @@ AOJLib = (function() {
 
   AOJLib.prototype.getSolveList = function(userList) {
     return this._getPromiseList(userList, this.getSolve);
+  };
+
+  AOJLib.prototype.getSolves = function(user) {
+    return this._reqAPI("user", {
+      id: user
+    }, this._parseSolves);
+  };
+
+  AOJLib.prototype.getSolvesList = function(userList) {
+    return this._getPromiseList(userList, this.getSolves);
   };
 
   AOJLib.prototype.getStatus = function(user) {
@@ -131,6 +145,17 @@ AOJLib = (function() {
       "user>id": String,
       "user>status>solved": parseInt
     });
+  };
+
+  AOJLib.prototype._parseSolves = function(xml) {
+    var id, _i, _len, _ref, _results;
+    _ref = $(xml).find("user>solved_list>problem>id");
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      id = _ref[_i];
+      _results.push($(id).text());
+    }
+    return _results;
   };
 
   return AOJLib;
