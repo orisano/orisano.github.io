@@ -28,6 +28,7 @@ $(() ->
       lowwer = (a, b) ->
         parseInt(a) - parseInt(b)
 
+      $("table>tbody>").remove()
       mySolveIds.sort lowwer
       rivalSolveIds.sort lowwer
       bothSolveIds = _.intersection mySolveIds, rivalSolveIds
@@ -42,10 +43,14 @@ $(() ->
       0
     )
 
-  $("#compare-button").click(() ->
+  enterEvent = () ->
     myId = $("#my-id").val()
     rivalId = $("#rival-id").val()
     compareSolved myId, rivalId
-  )
+
+  $("#compare-button").click enterEvent
+  $("body").keypress (event) ->
+    if event.which == 13
+      enterEvent()
 )
 
