@@ -47,10 +47,13 @@ $(() ->
     myId = $("#my-id").val()
     rivalId = $("#rival-id").val()
     compareSolved myId, rivalId
-
-  $("#compare-button").click enterEvent
-  $("body").keypress (event) ->
+  
+  keypressEvent = (event) ->
     if event.which == 13
       enterEvent()
+
+  $("#compare-button").click enterEvent
+  $("#my-id").keypress keypressEvent
+  $("#rival-id").keypress keypressEvent
 )
 
