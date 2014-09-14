@@ -63,6 +63,12 @@ $(function() {
     var myId, rivalId;
     myId = $("#my-id").val();
     rivalId = $("#rival-id").val();
+    $.cookie("myId", myId, {
+      expires: 7
+    });
+    $.cookie("rivalId", rivalId, {
+      expires: 7
+    });
     return compareSolved(myId, rivalId);
   };
   keypressEvent = function(event) {
@@ -71,8 +77,7 @@ $(function() {
     }
   };
   $("#compare-button").click(enterEvent);
-  $("#my-id").keypress(keypressEvent);
-  $("#rival-id").keypress(keypressEvent);
+  $("body").keypress(keypressEvent);
   getParams = function(query) {
     var key, keySearch, param, params, ret, val, _i, _len;
     ret = {};
@@ -88,6 +93,8 @@ $(function() {
     }
     return ret;
   };
+  $("#my-id").val($.cookie("myId"));
+  $("#rival-id").val($.cookie("rivalId"));
   params = getParams(location.search);
   if (((params != null ? params.myId : void 0) != null) && ((params != null ? params.rivalId : void 0) != null)) {
     $("#my-id").val(params.myId);

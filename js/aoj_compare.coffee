@@ -46,6 +46,8 @@ $(() ->
   enterEvent = () ->
     myId = $("#my-id").val()
     rivalId = $("#rival-id").val()
+    $.cookie "myId", myId, { expires: 7 }
+    $.cookie "rivalId", rivalId, { expires: 7 }
     compareSolved myId, rivalId
   
   keypressEvent = (event) ->
@@ -53,8 +55,7 @@ $(() ->
       enterEvent()
 
   $("#compare-button").click enterEvent
-  $("#my-id").keypress keypressEvent
-  $("#rival-id").keypress keypressEvent
+  $("body").keypress keypressEvent
 
   getParams = (query) ->
     ret = {}
@@ -66,6 +67,10 @@ $(() ->
         val = param.substring keySearch + 1
         ret[key] = decodeURI val
     ret
+
+  $("#my-id").val $.cookie("myId")
+  $("#rival-id").val $.cookie("rivalId")
+
   params = getParams location.search
   if params?.myId? and params?.rivalId?
     $("#my-id").val params.myId
