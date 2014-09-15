@@ -1,7 +1,7 @@
 $(() ->
   aojLib = new AOJLib()
 
-  userTemplate = _.template("<tr><td><%= id %></td><td><%= solved %></td></tr>")
+  userTemplate = _.template('<tr><td><a target="_blank" href="aoj_compare.html?rivalId=<%= id %>"><%= id %></a></td><td><%= solved %></td></tr>')
   $.getJSON("users.json").done((json) ->
     users = json["users"]
     $.when(aojLib.getSolveList(users), {}).done((solveList) ->

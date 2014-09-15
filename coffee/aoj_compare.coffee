@@ -72,9 +72,10 @@ $(() ->
   $("#rival-id").val $.cookie("rivalId")
 
   params = getParams location.search
-  if params?.myId? and params?.rivalId?
+  if params?.myId?
     $("#my-id").val params.myId
+  if params?.rivalId?
     $("#rival-id").val params.rivalId
-    enterEvent()
+  enterEvent()
 )
 
