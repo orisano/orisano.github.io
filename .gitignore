@@ -1,0 +1,8 @@
+*.swp
+*.map
+*.log
+*.txt
+*~
+.DS_Store
+node_modules/
+js/
