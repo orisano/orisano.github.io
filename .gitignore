@@ -5,4 +5,5 @@
 *~
 .DS_Store
 node_modules/
-js/
+js/*
+css/*.min.css
