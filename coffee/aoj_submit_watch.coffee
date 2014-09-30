@@ -12,7 +12,7 @@ $ () ->
 
   $.getJSON("users.json").done (json) ->
     users = json["users"]
-    aojLib.getStatusList(users).done (statusList) ->
+    $.when(aojLib.getStatusList(users), {}).done (statusList) ->
       allStatus = Array.prototype.concat.apply([], statusList, cache)
       allStatus = _.uniq(allStatus)
       allStatus.sort (a, b) ->

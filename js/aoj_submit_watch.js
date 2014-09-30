@@ -17,7 +17,7 @@ $(function() {
   $.getJSON("users.json").done(function(json) {
     var users;
     users = json["users"];
-    return aojLib.getStatusList(users).done(function(statusList) {
+    return $.when(aojLib.getStatusList(users), {}).done(function(statusList) {
       var allStatus, cache;
       allStatus = Array.prototype.concat.apply([], statusList, cache);
       allStatus = _.uniq(allStatus);
