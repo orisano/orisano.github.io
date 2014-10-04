@@ -1,7 +1,7 @@
 $(function() {
   var aojLib, userTemplate;
   aojLib = new AOJLib();
-  userTemplate = _.template('<tr><td><a target="_blank" href="aoj_compare.html?rivalId=<%= id %>"><%= id %></a></td><td><%= solved %></td></tr>');
+  userTemplate = _.template('<tr><td><a target="_blank" href="aoj_compare.html?rivalId=<%= id %>"><%= id %></a> <a href="aoj_submit_watch.html#<%= id %>" target="_blank">Log</a></td><td><%= solved %></td></tr>');
   return $.getJSON("users.json").done(function(json) {
     var users;
     users = json["users"];

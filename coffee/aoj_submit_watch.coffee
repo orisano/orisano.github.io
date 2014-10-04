@@ -10,8 +10,13 @@ $ () ->
       el += submitLogTemplate(submitLog[i])
     $(".tablewrapper").append el
 
+  getIntersection = (a, b) ->
+    $.grep a, (i) ->
+      $.inArray(i, b) > -1
+
   $.getJSON("users.json").done (json) ->
-    users = json["users"]
+    hash_users = location.hash.substr(1).split ","
+    users = if hash_users[0] == "" then json["users"] else getIntersection hash_users, json["users"]
     $.when(aojLib.getStatusList(users), {}).done (statusList) ->
       allStatus = Array.prototype.concat.apply([], statusList, cache)
       allStatus = _.uniq(allStatus)
