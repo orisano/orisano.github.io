@@ -8,6 +8,9 @@ $(function() {
       start = 0;
     }
     end || (end = submitLog.length);
+    if (end > submitLog.length) {
+      end = submitLog.length;
+    }
     el = "";
     for (i = _i = start; _i < end; i = _i += 1) {
       el += submitLogTemplate(submitLog[i]);
