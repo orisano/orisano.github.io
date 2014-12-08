@@ -12,16 +12,10 @@ $ () ->
       el += submitLogTemplate(submitLog[i])
     $(".tablewrapper").append el
 
-  getIntersection = (a, b) ->
-    $.grep a, (i) ->
-      $.inArray(i, b) > -1
-
-  $.getJSON("users.json").done (json) ->
-    hash_users = location.hash.substr(1).split ","
-    users = if hash_users[0] == "" then json["users"] else getIntersection hash_users, json["users"]
+  getSubmitLog = (users) ->
     $.when(aojLib.getStatusList(users), {}).done (statusList) ->
-      allStatus = Array.prototype.concat.apply([], statusList, cache)
-      allStatus = _.uniq(allStatus)
+      allStatus = Array.prototype.concat.apply [], statusList, cache
+      allStatus = _.uniq allStatus
       allStatus.sort (a, b) ->
         b.submission_date - a.submission_date
       localStorage.setItem("cache", JSON.stringify(allStatus))
@@ -32,3 +26,12 @@ $ () ->
   cache = $.parseJSON(localStorage.getItem("cache"))
   if (cache)
     appendSubmitLog cache, 0, 30
+
+  hash_users = location.hash.substr(1).split ","
+  if (hash_users.length > 0)
+    getSubmitLog hash_users
+  else
+    $.getJSON("users.json").done (json) ->
+      getSubmitLog json["users"]
+
+
