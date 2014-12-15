@@ -36,7 +36,7 @@ $(function() {
     appendSubmitLog(cache, 0, 30);
   }
   hash_users = location.hash.substr(1).split(",");
-  if (hash_users.length > 1) {
+  if (hash_users[0] !== "") {
     return getSubmitLog(hash_users);
   } else {
     return $.getJSON("users.json").done(function(json) {

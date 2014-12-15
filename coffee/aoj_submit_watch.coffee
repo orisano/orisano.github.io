@@ -28,7 +28,7 @@ $ () ->
     appendSubmitLog cache, 0, 30
 
   hash_users = location.hash.substr(1).split ","
-  if (hash_users.length > 1)
+  if (hash_users[0] != "")
     getSubmitLog hash_users
   else
     $.getJSON("users.json").done (json) ->
