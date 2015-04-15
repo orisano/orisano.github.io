@@ -1,8 +1,8 @@
 $(() ->
   aojLib = new AOJLib()
 
-  solveTemplate = _.template '<td><a target="_blank" href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=<%= id %>"><%= id %></a></td>'
-  tweetTemplate = _.template '<%= rivalName %>さんと私は<%= bothCount %>問共通の問題を解いていて、<%= myOnlyCount %>問が私だけ解いていて <%= rivalOnlyCount %>問が<%= rivalName %>さんだけが解いています http://orisano.github.io/aoj_compare?myId=<%= myName %>%26rivalId=<%= rivalName %>'
+  solveTemplate = _.template '<td><a target="_blank" href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=<%- id %>"><%- id %></a></td>'
+  tweetTemplate = _.template '<%- rivalName %>さんと私は<%- bothCount %>問共通の問題を解いていて、<%- myOnlyCount %>問が私だけ解いていて <%- rivalOnlyCount %>問が<%- rivalName %>さんだけが解いています http://orisano.github.io/aoj_compare?myId=<%- myName %>%26rivalId=<%- rivalName %>'
   tweetTag = ""
   appendSolved = (list, tableName, nlspan=10) ->
     count = 0
