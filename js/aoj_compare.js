@@ -54,6 +54,7 @@ $(function() {
       appendSolved(bothSolveIds, "#both-table");
       appendSolved(myOnlySolveIds, "#my-only-solve-table");
       appendSolved(rivalOnlySolveIds, "#rival-only-solve-table");
+      $("#diff-count").text("" + rivalOnlySolveIds.length);
       updateTweetButton(myId, rivalId, bothSolveIds, myOnlySolveIds, rivalOnlySolveIds);
       return 0;
     });
