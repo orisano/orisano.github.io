@@ -57,8 +57,8 @@ class AOJLib
   _parseStatus: (xml) =>
     statusList = $(xml).find "status_list>status"
     (@_parseXML(status, {
-      "status>run_id": String,
-      "status>problem_id": String,
+      "status>run_id": String, 
+      "status>problem_id": String, 
       "status>language": String,
       "status>cputime": parseInt,
       "status>memory": parseInt,
@@ -70,7 +70,6 @@ class AOJLib
     }) for status in statusList)
 
   _parseSolve: (xml) =>
-    xml = xml.substr(0, xml.indexOf "<solved_list>") + "</user>"
     @_parseXML(xml, {
       "user>id": String,
       "user>status>solved": parseInt,

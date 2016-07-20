@@ -129,7 +129,6 @@ AOJLib = (function() {
   };
 
   AOJLib.prototype._parseSolve = function(xml) {
-    xml = xml.substr(0, xml.indexOf("<solved_list>")) + "</user>";
     return this._parseXML(xml, {
       "user>id": String,
       "user>status>solved": parseInt
